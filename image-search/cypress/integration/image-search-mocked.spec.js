@@ -8,7 +8,7 @@ describe('Image search with Mock API', () => {
       url: 'search/photos?query=mock+',
       response: '@unsplashData',
     });
-
+ // use / because it's using the baseurl whick is in cypress.json
     cy.visit('/');
 
     cy.get('[data-testid="search-input"]').type('mock {enter}');
@@ -18,6 +18,7 @@ describe('Image search with Mock API', () => {
       .and('have.length', 10);
   });
 
+  //check what happens when API doesn't return data
   it('should not display images when API does not return data', () => {
     cy.server().route({
       method: 'GET',
@@ -25,7 +26,7 @@ describe('Image search with Mock API', () => {
       status: 200,
       response: {
         results: [],
-        total: 0,
+        total: 0, //we need total because of what the applcation api returns
       },
     });
 
